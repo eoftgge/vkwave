@@ -9162,18 +9162,34 @@ class PollsGetVotersResponse(BaseModel):
     response: List[PollsVoters]
 
 
+class StoreGetFavoriteStickers(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    count: conint(ge=0) = Field(..., description='Total number')
+    items: List[BaseSticker]
+
+
 class StoreGetFavoriteStickersResponse(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    response: List[BaseSticker]
+    response: StoreGetFavoriteStickers
+
+
+class StoreGetProducts(BaseModel):
+    class Config:
+        extra = Extra.forbid
+
+    count: conint(ge=0) = Field(..., description='Total number')
+    items: List[StoreProduct]
 
 
 class StoreGetProductsResponse(BaseModel):
     class Config:
         extra = Extra.forbid
 
-    response: List[StoreProduct]
+    response: StoreGetProducts
 
 
 class Response176(BaseModel):
@@ -10524,7 +10540,7 @@ class UsersUserFull(UsersUser):
     is_message_request: Optional[bool] = None
     descriptions: Optional[List[str]] = None
     lists: Optional[List[int]] = None
-
+    can_invite_to_chats: Optional[bool] = None
 
 class GroupsUserXtrRole(UsersUserFull):
     class Config:
